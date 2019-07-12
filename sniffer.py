@@ -37,3 +37,6 @@ def main():
                time.sleep(1)  # prevent registering multiple times
        time.sleep(0.01)
     rfdevice.cleanup()
+
+if __name__ == "__main__":
+    main()
