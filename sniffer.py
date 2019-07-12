@@ -7,7 +7,9 @@ import time
 import logging
 
 from rpi_rf import RFDevice
-import telepot
+import
+
+import local_settings as l
 
 
 rfdevice = None
@@ -29,8 +31,9 @@ def main():
     while True:
        if rfdevice.rx_code_timestamp != timestamp:
            timestamp = rfdevice.rx_code_timestamp
-           if str(rfdevice.rx_code) == '7617544':
-               bot.sendMessage(l.telegram['to_user_id'], "Doorbell!")
+           if str(rfdevice.rx_code) == l.DOORBELL_RF_ID:
+               # bot.sendMessage(l.telegram['to_user_id'], "Doorbell!")
+               print("Doorbell sounded")
                time.sleep(1)  # prevent registering multiple times
        time.sleep(0.01)
     rfdevice.cleanup()
