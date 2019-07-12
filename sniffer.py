@@ -24,7 +24,7 @@ def exithandler(signal, frame):
 def main():
     bot = telepot.Bot(l.telegram['token'])
     signal.signal(signal.SIGINT, exithandler)
-    rfdevice = RFDevice('27')
+    rfdevice = RFDevice(27)
     rfdevice.enable_rx()
     timestamp = None
     logging.info("Listening for codes on GPIO " + str(args.gpio))
