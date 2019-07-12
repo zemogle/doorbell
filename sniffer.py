@@ -7,7 +7,7 @@ import time
 import logging
 
 from rpi_rf import RFDevice
-import
+import telepot
 
 import local_settings as l
 
