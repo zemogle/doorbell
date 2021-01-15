@@ -15,6 +15,10 @@ import local_settings as l
 logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
                     format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s', )
 
+def exithandler(signal, frame):
+    rfdevice.cleanup()
+    sys.exit(0)
+
 def main():
     bot = telepot.Bot(l.telegram['token'])
     signal.signal(signal.SIGINT, exithandler)
