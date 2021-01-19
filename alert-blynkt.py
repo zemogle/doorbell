@@ -48,7 +48,7 @@ def main():
         resp = requests.get(url, headers=headers)
         if resp.status_code == 200:
             etag = resp.headers.get('ETag')
-            status = process_response(resp.json())
+            status = parse_response(resp.json())
         elif resp.status_code != 304:
             # back off if the server is throwing errors
             time.sleep(60)
