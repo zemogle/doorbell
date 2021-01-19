@@ -5,10 +5,9 @@ import time
 import logging
 import requests
 import blinkt
-
+from datetime import datetime
 
 import local_settings as l
-
 
 logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
                     format='%(asctime)-15s - [%(levelname)s] %(module)s: %(message)s', )
