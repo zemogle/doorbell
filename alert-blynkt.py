@@ -5,7 +5,7 @@ import time
 import logging
 import requests
 import blinkt
-from datetime import datetime
+from datetime import datetime, timedelta
 
 import local_settings as l
 
@@ -52,7 +52,7 @@ def main():
             # back off if the server is throwing errors
             time.sleep(60)
             continue
-        if status:
+        if status and (datetime.now() - status) < timedelta(minutes=10):
             blink_blinkt()
         time.sleep(0.1)
 
