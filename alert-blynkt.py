@@ -60,7 +60,7 @@ def main():
                 blink_blinkt(colours=[0,0,255])
             elif timesince >= timedelta(seconds=30) and timesince < timedelta(days=1):
                 blinkt.set_pixel(7, 1, 193, 22)
-                blinkt.set_brightness(0.5)
+                blinkt.set_brightness(0.1)
                 blinkt.show()
         time.sleep(0.1)
 
