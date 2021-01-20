@@ -6,4 +6,4 @@ BASEDIR=$(dirname "$0")
 LOGFILE="$BASEDIR/doorbell.log"
 
 echo "Starting in background and writing log file to $LOGFILE"
-nohup python3 -u "$BASEDIR/sniffer.py" "$@" &>> "$LOGFILE" &
+nohup python3 -u "$BASEDIR/alert-blynkt.py" "$@" &>> "$LOGFILE" &
