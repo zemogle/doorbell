@@ -15,7 +15,11 @@ logging.basicConfig(level=logging.INFO, datefmt='%Y-%m-%d %H:%M:%S',
 etf = None
 
 def cheerlights():
-    resp = requests.get('http://api.thingspeak.com/channels/1417/field/2/last.json').json()
+    try:
+        resp = requests.get('http://api.thingspeak.com/channels/1417/field/2/last.json').json()
+    except Exception as e:
+        logging.error(f"{e}")
+        return [0,128,0]
     h = resp['field2'].lstrip('#')
     colours = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
     return colours
