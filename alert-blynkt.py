@@ -41,7 +41,7 @@ def blink_single(colours,pix):
     reset_blinkt()
     blinkt.set_pixel(j, colours[0], colours[1], colours[2])
     for i in range(-5,6):
-        b = (5 - abs(i))/10.)
+        b = (5 - abs(i))/10.
         blinkt.set_brightness(b)
         blinkt.show()
         time.sleep(0.1)
