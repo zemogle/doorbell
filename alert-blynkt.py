@@ -40,11 +40,11 @@ def blink_blinkt(colours):
 def blink_single(colours,pix):
     reset_blinkt()
     blinkt.set_pixel(pix, colours[0], colours[1], colours[2])
-    for i in range(-5,6):
-        b = (5 - abs(i))/10.
+    for i in range(-20,20):
+        b = (20 - abs(i))/20.
         blinkt.set_brightness(b)
         blinkt.show()
-        time.sleep(0.1)
+        time.sleep(0.05)
     reset_blinkt()
 
 
@@ -75,10 +75,12 @@ def main():
             timesince = datetime.now() - status
             if timesince < timedelta(seconds=30):
                 blink_blinkt(colours=[0,0,255])
-            elif timesince >= timedelta(seconds=30) and timesince < timedelta(hours=1):
+            elif timesince >= timedelta(seconds=30) and timesince < timedelta(minutes=2):
                 blink_single(colours=[1, 193, 22], pix=1)
-            elif timesince >= timedelta(hours=1) and timesince < timedelta(hours=4):
+            elif timesince >= timedelta(minutes=2) and timesince < timedelta(minutes=5):
                 blink_single(colours=[1, 193, 22], pix=2)
+            else:
+                reset_blinkt()
         time.sleep(0.1)
 
 if __name__ == "__main__":
