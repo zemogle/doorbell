@@ -22,27 +22,35 @@ def parse_response(data):
     else:
         return False
 
+def reset_blinkt():
+    for j in range(blinkt.NUM_PIXELS):
+        blinkt.set_pixel(j, 0, 0, 0)
+    blinkt.show()
+
 def blink_blinkt(colours):
     blinkt.set_brightness(0.5)
     for i in range(3):
         for j in range(blinkt.NUM_PIXELS):
             blinkt.set_pixel(j, colours[0], colours[1], colours[2])
-
         blinkt.show()
         time.sleep(0.1)
-
-        for j in range(blinkt.NUM_PIXELS):
-            blinkt.set_pixel(j, 0, 0, 0)
-
-        blinkt.show()
+        reset_blinkt()
         time.sleep(0.2)
+
+def blink_single(colours,pix):
+    reset_blinkt()
+    blinkt.set_pixel(j, colours[0], colours[1], colours[2])
+    for i in range(0,1,10):
+        blinkt.set_brightness(i)
+        blinkt.show()
+        time.sleep(0.1)
 
 def main():
     etag = None
     url = f"https://thingspeak.com/channels/1284652/feed/last.json?api_key={l.THINKSPEAK_KEY}"
 
     while True:
-        headers = {'Prefer': 'wait=120'}  # <----- add hint
+        headers = {'Prefer': 'wait=120'} 
         if etag:
             headers['If-None-Match'] = etag
         try:
@@ -64,10 +72,10 @@ def main():
             timesince = datetime.now() - status
             if timesince < timedelta(seconds=30):
                 blink_blinkt(colours=[0,0,255])
-            elif timesince >= timedelta(seconds=30) and timesince < timedelta(days=1):
-                blinkt.set_pixel(7, 1, 193, 22)
-                blinkt.set_brightness(0.1)
-                blinkt.show()
+            elif timesince >= timedelta(seconds=30) and timesince < timedelta(hours=1):
+                blink_single(colours=[1, 193, 22], pix=1)
+            elif timesince >= timedelta(hours=1) and timesince < timedelta(hours=4):
+                blink_single(colours=[1, 193, 22], pix=2)
         time.sleep(0.1)
 
 if __name__ == "__main__":
