@@ -45,7 +45,13 @@ def main():
         headers = {'Prefer': 'wait=120'}  # <----- add hint
         if etag:
             headers['If-None-Match'] = etag
-        resp = requests.get(url, headers=headers)
+        try:
+            resp = requests.get(url, headers=headers)
+        except requests.exceptions.ConnectionError:
+            blink_blinkt(colours=[220,118,51])
+            time.sleep(60)
+            continue
+
         if resp.status_code == 200:
             etag = resp.headers.get('ETag')
             status = parse_response(resp.json())
