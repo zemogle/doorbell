@@ -40,17 +40,20 @@ def blink_blinkt(colours):
 def blink_single(colours,pix):
     reset_blinkt()
     blinkt.set_pixel(j, colours[0], colours[1], colours[2])
-    for i in range(0,1,10):
-        blinkt.set_brightness(i)
+    for i in range(-5,6):
+        b = (5 - abs(i))/10.)
+        blinkt.set_brightness(b)
         blinkt.show()
         time.sleep(0.1)
+    reset_blinkt()
+
 
 def main():
     etag = None
     url = f"https://thingspeak.com/channels/1284652/feed/last.json?api_key={l.THINKSPEAK_KEY}"
 
     while True:
-        headers = {'Prefer': 'wait=120'} 
+        headers = {'Prefer': 'wait=120'}
         if etag:
             headers['If-None-Match'] = etag
         try:
