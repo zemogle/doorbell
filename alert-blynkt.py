@@ -51,7 +51,7 @@ def blink_single(colours,pix):
 def main():
     etag = None
     url = f"https://thingspeak.com/channels/1284652/feed/last.json?api_key={l.THINKSPEAK_KEY}"
-
+    reset_blinkt()
     while True:
         headers = {'Prefer': 'wait=120'}
         if etag:
@@ -85,4 +85,5 @@ if __name__ == "__main__":
     try:
         main()
     except KeyboardInterrupt:
+        reset_blinkt()
         pass
