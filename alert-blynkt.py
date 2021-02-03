@@ -70,7 +70,7 @@ def main():
         try:
             resp = requests.get(url, headers=headers)
         except requests.exceptions.ConnectionError:
-            blink_blinkt(colours=[0,0,255])
+            blink_single(colours=[0,0,255],pix=4)
             time.sleep(60)
             continue
 
